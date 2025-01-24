@@ -17,7 +17,7 @@
     ansible.builtin.user:
       name: expense
     
-  - name: create app directory
+  - name: Create App directory
     ansible.builtin.file:
       path: /app
       state: directory # if we don't specify anything, then by default it will be considered as file
@@ -28,6 +28,6 @@
       dest: /tmp/backend.zip
 
   - name: Unzip Backend Code
-    ansible.builtin.unarchieve:
+    ansible.builtin.unarchive:
       src: /tmp/backend.zip
       dest: /app
