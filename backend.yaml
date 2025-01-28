@@ -31,3 +31,12 @@
     ansible.builtin.unarchive:
       src: /tmp/backend.zip
       dest: /app
+      remote_src: yes
+  
+  - name: Install Dependencies
+    community.general.npm:
+      path: /app
+
+  - name: copy backsend service 
+      src: backend.service
+      dest: /etc/systemd/system/backend.service
