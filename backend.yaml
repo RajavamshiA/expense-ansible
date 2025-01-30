@@ -31,10 +31,10 @@
     ansible.builtin.unarchive:
       src: /tmp/backend.zip
       dest: /app
-      remote_src: yes
+      remote_src: yes # It says my source is in remote machine, don't look for the file in ansible controller. If we don't enable it, by default, it looks the source in ansible controller in ansibler server.
   
   - name: Install Dependencies
-    community.general.npm:
+    community.general.npm: # it goes to the path location and installs dependencies based on nodejs version.
       path: /app
 
   - name: copy backsend service 
