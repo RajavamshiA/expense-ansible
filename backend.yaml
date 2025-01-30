@@ -8,10 +8,13 @@
   - name: enable nodejs 20
     ansible.builtin.command: dnf module enable nodejs:20 -y
 
-  - name: Install nodejs
+  - name: Install nodejs & mysql
     ansible.builtin.package:
-      name: nodejs
+      name: "{{ item }}"
       state: present
+    loop:
+    - nodejs
+    - mysql 
     
   - name: Create expense user
     ansible.builtin.user:
@@ -40,3 +43,12 @@
   - name: copy backsend service 
       src: backend.service
       dest: /etc/systemd/system/backend.service
+
+  - name: Import Mysql Data Schema
+    community.mysql.mysql_db:
+      state: import
+      name: all
+      login_user: root
+      login_password: ExpenseApp@1
+      login_host: mysql.daws-82ss.online
+      target: /app/schema/backend.sql
